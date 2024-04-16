@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsnd --respawn --clear src/app.ts",
     "build2": "rimraf ./dist && tsc",
-    "build": "npm run build && node dist/app.js"
+    "build": "npm run build2 && node dist/app.js",
+    "start": "node dist/app.js"
   },
   "keywords": [],
   "author": "",
