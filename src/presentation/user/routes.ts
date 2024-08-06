@@ -19,7 +19,10 @@ export class UserRoutes {
     router.post('/',  controller.create);
     router.put('/',  controller.update);
     router.get('/',  controller.getUsers);
+    router.get('/:id',  controller.getUser);
+    router.delete('/:id',  controller.delete);
     router.post('/csv',  controller.createFromCsv);
+    router.post('/login',  controller.login);
 
 
 

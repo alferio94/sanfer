@@ -1,4 +1,4 @@
-import { GroupModel } from "../../data";
+import { GroupModel } from "../../data/mongo/models/user-group.model";
 import { UpdateGroupDto,CreateGroupDto,CustomError } from "../../domain";
 
 
@@ -30,10 +30,20 @@ export class GroupsService{
     }
     async getAll(){
         try {
-            const groups = GroupModel.find();
+            //obtener todos los grupos de la base de datos ordenados por el nombre
+            const groups = GroupModel.find().sort({name: 1}).exec();
+            //const groups = GroupModel.find();
             return groups
         } catch (error) {
             throw CustomError.internalServer('Error en Group Service GetlAll')
+        }
+    }
+    async delete(id:string){
+        try {
+            const event = GroupModel.findByIdAndDelete(id);
+            return event
+        } catch (error) {
+            throw CustomError.internalServer('Error en event Service Delete')
         }
     }
     

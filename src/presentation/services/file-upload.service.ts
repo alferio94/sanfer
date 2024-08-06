@@ -9,7 +9,6 @@ export class FileUploadService {
 
   private checkFolder(folderPath: string) {
     if(!fs.existsSync(folderPath)){
-      console.log('not')
         fs.mkdirSync(folderPath);
     }
   }
@@ -26,6 +25,7 @@ export class FileUploadService {
             throw CustomError.badRequest('Invalid extension: ' + fileExtension)
         }
         const destination = path.resolve(__dirname,`../../../public/uploads`,folder);
+        console.log(destination)
         this.checkFolder(destination);
         const fileName = `${fName}.${fileExtension}`
         file.mv(destination + `/${fileName}`);

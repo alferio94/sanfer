@@ -9,8 +9,8 @@ export class CreateGroupDto{
     static create(object:{[key:string]:any}):[string?, CreateGroupDto?]{
         const {name, specialty, color, icon} = object;
 
-        if(!name) return ['El nombre es obligatorio'];
-        if(!specialty) return ['La especialidad es obligatoria'];
+        if(!name || name==='') return ['El nombre es obligatorio'];
+        if(!specialty || name==='') return ['La especialidad es obligatoria'];
 
         return[undefined, new CreateGroupDto(name, specialty, color, icon)]
     }

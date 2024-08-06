@@ -23,8 +23,12 @@ export class EventRoutes {
     router.post('/', controller.create) 
     router.put('/', controller.update) 
     router.get('/', controller.getEvents) 
-    router.get('/:id', controller.getEvent) 
-    router.post('/:type', controller.uploadImage) 
+    router.get('/menu', controller.getMenu)
+    router.get('/populate/:id', controller.getEventPopulated) 
+    router.get('/:id', controller.getEvent)
+    router.post('/:type', controller.uploadImage)
+
+    router.delete('/:id', controller.delete)
 
 
 

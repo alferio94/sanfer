@@ -14,11 +14,12 @@ export class EventController {
     if (error instanceof CustomError) {
       return res.status(error.statusCode).json({ error: error.message });
     }
+    console.log(error)
     return res.status(500).json({ error: "Internal server error" });
   };
 
   create =  (req:Request, res:Response) =>{
-    const [error, createEventDto] = CreateEventDto.create(req.body);
+    const [error, createEventDto] = CreateEventDto.create(JSON.parse(req.body.event));
     if(error) return res.status(400).json({error})
     this.eventService.createEvent(createEventDto!)
     .then(event => res.status(201).json(event))
@@ -43,6 +44,12 @@ export class EventController {
     .then(events => res.json(events))
     .catch(error => this.handleError(error, res)) 
   }
+  getEventPopulated =  (req:Request, res:Response) =>{
+    const id = req.params.id
+     this.eventService.getEventPopulate(id)
+    .then(events => res.json(events))
+    .catch(error => this.handleError(error, res)) 
+  }
   uploadImage = (req:Request, res:Response) =>{
     const type = req.params.type
     const event = JSON.parse(req.body.event);
@@ -60,5 +67,16 @@ export class EventController {
       })
     })
     .catch(error => this.handleError(error, res)) 
+  }
+  delete=(req:Request, res:Response) =>{
+    const id = req.params.id;
+    if(!id) return res.status(400).json({error: 'ID invalido'});
+    this.eventService.deleteEvent(id)
+    .then(event => res.json(event))
+  }
+  getMenu = (req:Request, res:Response) =>{
+    this.eventService.getMenu()
+    .then(menuItems => res.json(menuItems))
+    .catch(error => this.handleError(error, res))
   }
 }

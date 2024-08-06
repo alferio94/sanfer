@@ -16,7 +16,7 @@ export class GroupController {
   };
 
   create = async (req:Request, res:Response) =>{
-    const [error, createGroupDto] = CreateGroupDto.create(req.body);
+    const [error, createGroupDto] = CreateGroupDto.create(JSON.parse(req.body.group));
     if(error) return res.status(400).json({error})
     this.groupService.createGroup(createGroupDto!)
     .then(group => res.status(201).json(group))
@@ -24,7 +24,7 @@ export class GroupController {
 
   }
   update = async (req:Request, res:Response) =>{
-    const [error, updateGroupDto] = UpdateGroupDto.create(req.body);
+    const [error, updateGroupDto] = UpdateGroupDto.create(JSON.parse(req.body.group));
     if(error) return res.status(400).json({error})
     this.groupService.updateGroup(updateGroupDto!)
     .then(group => res.status(202).json(group))
@@ -36,6 +36,12 @@ export class GroupController {
     this.groupService.getAll()
     .then(groups => res.json(groups))
     .catch(error => this.handleError(error, res)) 
+  }
+  delete=(req:Request, res:Response) =>{
+    const id = req.params.id;
+    if(!id) return res.status(400).json({error: 'ID invalido'});
+    this.groupService.delete(id)
+    .then(group => res.json(group))
   }
 
 }

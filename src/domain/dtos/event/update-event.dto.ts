@@ -11,7 +11,9 @@ export class UpdateEventDto {
     public readonly campusMap: string,
     public readonly dressCode: string,
     public readonly tips: string,
-    public readonly extra: string
+    public readonly extra: string,
+    public readonly groups: string[],
+    public readonly menuItems: string[]
   ) {}
 
   static create(object: { [key: string]: any }): [string?, UpdateEventDto?] {
@@ -26,6 +28,8 @@ export class UpdateEventDto {
       dressCode,
       tips,
       extra,
+      groups,
+      menuItems
     } = object;
 
     if (!id) return ["Id es obligatorio"];
@@ -56,7 +60,9 @@ export class UpdateEventDto {
         campusMap,
         dressCode,
         tips,
-        extra
+        extra,
+        groups,
+        menuItems 
       ),
     ];
   }

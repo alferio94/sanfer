@@ -22,8 +22,9 @@ export class CreateEventDto {
       dressCode,
       tips,
       extra,
+      
     } = object;
-
+    if(!name || name === '')return['El nombre es obligatorio']
 
     return [
       undefined,

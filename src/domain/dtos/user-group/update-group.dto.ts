@@ -14,6 +14,8 @@ export class UpdateGroupDto{
         const {id,name, specialty, color, icon} = object;
          if(!id)return['Id es obligatorio']
          if(!Validators.isMongoID(id)) return ['Id invalido']
+         if(!name || name==='') return ['El nombre es obligatorio'];
+         if(!specialty || name==='') return ['La especialidad es obligatoria'];
 
 
         return[undefined, new UpdateGroupDto(id,name, specialty, color, icon)]

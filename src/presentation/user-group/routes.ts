@@ -17,6 +17,7 @@ export class GroupsRoutes {
     router.post('/', controller.create );
     router.put('/', controller.update );
     router.get('/', controller.getCategories );
+    router.delete('/:id', controller.delete );
 
 
 
